@@ -1,0 +1,174 @@
+[gd_scene load_steps=19 format=3 uid="uid://xe1nap42m7r0"]
+
+[ext_resource type="PackedScene" uid="uid://dumjbqixlovxl" path="res://Scenes/Level/world_limits.tscn" id="1_iheil"]
+[ext_resource type="Script" uid="uid://k4hljnvgkksf" path="res://Scenes/Level/level.gd" id="1_lscpc"]
+[ext_resource type="PackedScene" uid="uid://iwft4xrxbqg4" path="res://Scenes/Actors/Birb/birb.tscn" id="2_1ov45"]
+[ext_resource type="Script" uid="uid://l4fuhdh6kip3" path="res://Scenes/Level/parallax_background.gd" id="2_6rsi7"]
+[ext_resource type="Texture2D" uid="uid://dajpfyqlgt8yj" path="res://Images/Background/1.png" id="2_362x8"]
+[ext_resource type="Texture2D" uid="uid://b2tw1ka8osacp" path="res://Images/Background/2.png" id="3_43gce"]
+[ext_resource type="Script" uid="uid://dd2k6svcnntgr" path="res://Scenes/Level/wall_generator.gd" id="4_06ioy"]
+[ext_resource type="Texture2D" uid="uid://b34j03yeoj1y3" path="res://Images/Background/4.png" id="4_43gce"]
+[ext_resource type="PackedScene" uid="uid://dbxu8d86xry4q" path="res://Scenes/Actors/WallObstacle/wall_obstacle.tscn" id="5_x701m"]
+[ext_resource type="Script" uid="uid://by7u4wvmohqe4" path="res://Scenes/Level/ui.gd" id="6_7i4w6"]
+[ext_resource type="Script" uid="uid://b5ilp34phmenu" path="res://Scenes/Level/game_over.gd" id="11_unl86"]
+[ext_resource type="AudioStream" uid="uid://dqf00hyxry5bn" path="res://Sounds/Music/We're Bird People Now.ogg" id="12_k2muv"]
+[ext_resource type="AudioStream" uid="uid://c24164jmqoff8" path="res://Sounds/SFX/Blip 003.wav" id="13_dhxf7"]
+[ext_resource type="AudioStream" uid="uid://b1eovojas4jt0" path="res://Sounds/SFX/Death 002.wav" id="14_k2muv"]
+[ext_resource type="AudioStream" uid="uid://dgalrpkuswqsn" path="res://Sounds/SFX/Simple Jump 001.wav" id="15_dhxf7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_unl86"]
+font_size = 72
+
+[sub_resource type="LabelSettings" id="LabelSettings_t7iwn"]
+font_size = 72
+
+[sub_resource type="LabelSettings" id="LabelSettings_wvups"]
+font_size = 39
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_lscpc")
+
+[node name="ParallaxBackground" type="Node" parent="."]
+process_mode = 1
+script = ExtResource("2_6rsi7")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="ParallaxBackground"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground/ParallaxBackground"]
+
+[node name="1" type="Sprite2D" parent="ParallaxBackground/ParallaxBackground/ParallaxLayer2"]
+unique_name_in_owner = true
+texture = ExtResource("2_362x8")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground/ParallaxBackground"]
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground/ParallaxBackground/ParallaxLayer"]
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-50, 0)
+follow_viewport = false
+
+[node name="2" type="Sprite2D" parent="ParallaxBackground/ParallaxBackground/ParallaxLayer/Parallax2D"]
+unique_name_in_owner = true
+texture = ExtResource("3_43gce")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground/ParallaxBackground"]
+
+[node name="Parallax2D" type="Parallax2D" parent="ParallaxBackground/ParallaxBackground/ParallaxLayer3"]
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-100, 0)
+
+[node name="4" type="Sprite2D" parent="ParallaxBackground/ParallaxBackground/ParallaxLayer3/Parallax2D"]
+unique_name_in_owner = true
+texture = ExtResource("4_43gce")
+
+[node name="WorldLimits" parent="." instance=ExtResource("1_iheil")]
+process_mode = 1
+
+[node name="Birb" parent="." instance=ExtResource("2_1ov45")]
+process_mode = 1
+position = Vector2(202, 260)
+
+[node name="WallGenerator" type="Node2D" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+script = ExtResource("4_06ioy")
+wall_obstacle = ExtResource("5_x701m")
+
+[node name="NewObstacleTimer" type="Timer" parent="WallGenerator"]
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+script = ExtResource("6_7i4w6")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PointLabel" type="Label" parent="UI/HBoxContainer"]
+layout_mode = 2
+text = "Points:"
+
+[node name="PointApi" type="Label" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+
+[node name="GameOver" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+script = ExtResource("11_unl86")
+
+[node name="Control" type="Control" parent="GameOver"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GameOver/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -44.5
+offset_right = 112.0
+offset_bottom = 44.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GameOver/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="YourScoreLabel" type="Label" parent="GameOver/Control/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "YOUR SCORE: "
+label_settings = SubResource("LabelSettings_unl86")
+
+[node name="YourScoreApi" type="Label" parent="GameOver/Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_t7iwn")
+
+[node name="Label" type="Label" parent="GameOver/Control/VBoxContainer"]
+layout_mode = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_wvups")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="GameOver/Control/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "RETRY"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+stream = ExtResource("12_k2muv")
+autoplay = true
+
+[node name="PointSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+stream = ExtResource("13_dhxf7")
+
+[node name="GameOverSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("14_k2muv")
+volume_db = -8.0
+
+[node name="JumpSFX" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("15_dhxf7")
+
+[connection signal="limit_touched" from="WorldLimits" to="." method="_on_world_limits_limit_touched"]
+[connection signal="timeout" from="WallGenerator/NewObstacleTimer" to="WallGenerator" method="_on_new_obstacle_timer_timeout"]
+[connection signal="pressed" from="GameOver/Control/VBoxContainer/Button" to="GameOver" method="_on_button_pressed"]

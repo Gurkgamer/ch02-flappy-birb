@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbxu8d86xry4q"]
+
+[ext_resource type="Script" uid="uid://b0g666vn4vgle" path="res://Scenes/Actors/WallObstacle/wall_obstacle.gd" id="1_83kjc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ktbf6"]
+
+[node name="WallObstacle" type="Node2D"]
+script = ExtResource("1_83kjc")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-7.62939e-06, 0)
+
+[node name="PointGap" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+
+[node name="GapCollisionShape" type="CollisionShape2D" parent="PointGap"]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_ktbf6")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

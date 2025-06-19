@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://iwft4xrxbqg4"]
+
+[ext_resource type="Script" uid="uid://bu226u20xjr6o" path="res://Scenes/Actors/Birb/birb.gd" id="1_8ki6c"]
+[ext_resource type="Texture2D" uid="uid://dfsajcldu1720" path="res://Scenes/Actors/Birb/Images/birb.jpg" id="2_gg4y1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gg4y1"]
+size = Vector2(30, 30)
+
+[node name="Birb" type="CharacterBody2D"]
+collision_mask = 0
+script = ExtResource("1_8ki6c")
+
+[node name="JumpCooldown" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.4
+one_shot = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.113208, 0.0993378)
+texture = ExtResource("2_gg4y1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gg4y1")
+
+[connection signal="timeout" from="JumpCooldown" to="." method="_on_jump_cooldown_timeout"]
