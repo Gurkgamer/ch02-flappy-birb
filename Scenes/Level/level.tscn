@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://xe1nap42m7r0"]
+[gd_scene load_steps=22 format=3 uid="uid://xe1nap42m7r0"]
 
 [ext_resource type="PackedScene" uid="uid://dumjbqixlovxl" path="res://Scenes/Level/world_limits.tscn" id="1_iheil"]
 [ext_resource type="Script" uid="uid://k4hljnvgkksf" path="res://Scenes/Level/level.gd" id="1_lscpc"]
@@ -15,6 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://c24164jmqoff8" path="res://Sounds/SFX/Blip 003.wav" id="13_dhxf7"]
 [ext_resource type="AudioStream" uid="uid://b1eovojas4jt0" path="res://Sounds/SFX/Death 002.wav" id="14_k2muv"]
 [ext_resource type="AudioStream" uid="uid://dgalrpkuswqsn" path="res://Sounds/SFX/Simple Jump 001.wav" id="15_dhxf7"]
+[ext_resource type="Script" uid="uid://cjmr348q2jyia" path="res://Scenes/Level/pause_menu.gd" id="16_mkqdc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_unl86"]
 font_size = 72
@@ -24,6 +25,22 @@ font_size = 72
 
 [sub_resource type="LabelSettings" id="LabelSettings_wvups"]
 font_size = 39
+
+[sub_resource type="FontFile" id="FontFile_n0xg1"]
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_2m32g"]
+font = SubResource("FontFile_n0xg1")
+font_size = 48
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_lscpc")
@@ -158,6 +175,7 @@ autoplay = true
 unique_name_in_owner = true
 process_mode = 1
 stream = ExtResource("13_dhxf7")
+volume_db = -12.0
 
 [node name="GameOverSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -168,7 +186,109 @@ volume_db = -8.0
 [node name="JumpSFX" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("15_dhxf7")
+volume_db = -8.0
+
+[node name="PauseMenu" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+visible = false
+script = ExtResource("16_mkqdc")
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -164.5
+offset_bottom = -99.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenu/HBoxContainer"]
+layout_mode = 2
+text = "GAME PAUSED"
+label_settings = SubResource("LabelSettings_2m32g")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/HBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="PauseMenu/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CurrentScoreLabel" type="Label" parent="PauseMenu/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Current score:"
+horizontal_alignment = 2
+
+[node name="CurrentScoreAPI" type="Label" parent="PauseMenu/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+
+[node name="Control2" type="Control" parent="PauseMenu/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Sound Controller" type="VBoxContainer" parent="PauseMenu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -351.5
+offset_top = 5.5
+offset_right = 351.5
+offset_bottom = 152.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="PauseMenu/Sound Controller"]
+layout_mode = 2
+text = "Sound Control:"
+
+[node name="HSeparator" type="HSeparator" parent="PauseMenu/Sound Controller"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/Sound Controller"]
+layout_mode = 2
+
+[node name="VolumeSliderAPI" type="HSlider" parent="PauseMenu/Sound Controller/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+max_value = 2.0
+step = 0.1
+
+[node name="VolumeValueAPI" type="Label" parent="PauseMenu/Sound Controller/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+text = "10"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="PauseMenu/Sound Controller"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="PauseMenu/Sound Controller"]
+layout_mode = 2
+text = "RESTART"
 
 [connection signal="limit_touched" from="WorldLimits" to="." method="_on_world_limits_limit_touched"]
 [connection signal="timeout" from="WallGenerator/NewObstacleTimer" to="WallGenerator" method="_on_new_obstacle_timer_timeout"]
 [connection signal="pressed" from="GameOver/Control/VBoxContainer/Button" to="GameOver" method="_on_button_pressed"]
+[connection signal="value_changed" from="PauseMenu/Sound Controller/HBoxContainer/VolumeSliderAPI" to="PauseMenu" method="_on_volume_slider_api_value_changed"]
+[connection signal="pressed" from="PauseMenu/Sound Controller/ResetButton" to="PauseMenu" method="_on_reset_button_pressed"]

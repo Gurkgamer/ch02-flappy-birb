@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3wtcnxlltdxy"]
+[gd_scene load_steps=4 format=3 uid="uid://d3wtcnxlltdxy"]
 
-[ext_resource type="Texture2D" uid="uid://bcimvaw1v7mbu" path="res://Scenes/Actors/Wall/Images/wall.png" id="1_vovqk"]
+[ext_resource type="Texture2D" uid="uid://dly43rmrm421a" path="res://Scenes/Actors/Wall/Images/PipeStyle1_1.png" id="1_8ra0y"]
+[ext_resource type="Texture2D" uid="uid://cbtcjehp8mfj0" path="res://Scenes/Actors/Wall/Images/PipeStyle1_2.png" id="2_727e3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vovqk"]
 size = Vector2(40, 615)
@@ -8,11 +9,26 @@ size = Vector2(40, 615)
 [node name="Wall" type="Area2D"]
 collision_layer = 0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4.76837e-07, -306.5)
-scale = Vector2(0.36036, 1.13729)
-texture = ExtResource("1_vovqk")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -307.5)
 shape = SubResource("RectangleShape2D_vovqk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-7.15256e-07, -604)
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_8ra0y")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -306.75)
+scale = Vector2(1.25, 13.0795)
+texture = ExtResource("2_727e3")
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -11.56)
+rotation = 3.14159
+scale = Vector2(1.25, 1.25)
+texture = ExtResource("1_8ra0y")
+flip_h = true

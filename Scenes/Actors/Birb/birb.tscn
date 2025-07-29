@@ -1,10 +1,58 @@
-[gd_scene load_steps=4 format=3 uid="uid://iwft4xrxbqg4"]
+[gd_scene load_steps=10 format=3 uid="uid://iwft4xrxbqg4"]
 
 [ext_resource type="Script" uid="uid://bu226u20xjr6o" path="res://Scenes/Actors/Birb/birb.gd" id="1_8ki6c"]
-[ext_resource type="Texture2D" uid="uid://dfsajcldu1720" path="res://Scenes/Actors/Birb/Images/birb.jpg" id="2_gg4y1"]
+[ext_resource type="Texture2D" uid="uid://dagsv58140tlt" path="res://Scenes/Actors/Birb/Images/Bird2-1.png" id="2_gg4y1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gg4y1"]
 size = Vector2(30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_il52x"]
+atlas = ExtResource("2_gg4y1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jftlq"]
+atlas = ExtResource("2_gg4y1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3m3mw"]
+atlas = ExtResource("2_gg4y1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8gqx"]
+atlas = ExtResource("2_gg4y1")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evo2i"]
+atlas = ExtResource("2_gg4y1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gg4y1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_il52x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jftlq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3m3mw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8gqx")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evo2i")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 5.0
+}]
 
 [node name="Birb" type="CharacterBody2D"]
 collision_mask = 0
@@ -15,11 +63,14 @@ unique_name_in_owner = true
 wait_time = 0.4
 one_shot = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.113208, 0.0993378)
-texture = ExtResource("2_gg4y1")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_gg4y1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gg4y1")
+animation = &"jump"
 
 [connection signal="timeout" from="JumpCooldown" to="." method="_on_jump_cooldown_timeout"]

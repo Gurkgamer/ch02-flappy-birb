@@ -15,6 +15,7 @@ grow_vertical = 2
 script = ExtResource("1_t2qfo")
 
 [node name="Button" type="Button" parent="."]
+custom_minimum_size = Vector2(150, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -22,9 +23,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -16.5
-offset_top = -15.5
+offset_top = -55.5
 offset_right = 16.5
-offset_bottom = 15.5
+offset_bottom = -24.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "GO"
@@ -49,11 +50,14 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -448.0
-offset_top = -281.0
+offset_top = -315.0
 offset_right = 447.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "Background
+text = "Sprites
+https://megacrash.itch.io/flappy-bird-assets
+
+Background
 https://free-game-assets.itch.io/free-sky-with-clouds-background-pixel-art-set
 
 Sound SFX
@@ -61,6 +65,7 @@ https://edwardcufaude.itch.io/soundfxpack1
 Sound FX Pack 1
 
 ‘Music composed by Bert Cole’
+- We're Bird People Now -
 bitbybitsound.com"
 horizontal_alignment = 1
 

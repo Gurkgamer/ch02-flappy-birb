@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfsajcldu1720"
-path="res://.godot/imported/birb.jpg-df039c3f3b3e836afc41ae1374371623.ctex"
+uid="uid://cbtcjehp8mfj0"
+path="res://.godot/imported/PipeStyle1_2.png-f585820dd9cf8e9fe3b9ce628f780ea2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Actors/Birb/Images/birb.jpg"
-dest_files=["res://.godot/imported/birb.jpg-df039c3f3b3e836afc41ae1374371623.ctex"]
+source_file="res://Scenes/Actors/Wall/Images/PipeStyle1_2.png"
+dest_files=["res://.godot/imported/PipeStyle1_2.png-f585820dd9cf8e9fe3b9ce628f780ea2.ctex"]
 
 [params]
 
